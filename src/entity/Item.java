@@ -82,29 +82,37 @@ public class Item {
 		private String url;
 		private double distance;
 		
-		public void setItemId(String itemId) {
+		public ItemBuilder setItemId(String itemId) {
 			this.itemId = itemId;
+			return this;
 		}
-		public void setName(String name) {
+		public ItemBuilder setName(String name) {
 			this.name = name;
+			return this;
 		}
-		public void setRating(double rating) {
+		public ItemBuilder setRating(double rating) {
 			this.rating = rating;
+			return this;
 		}
-		public void setAddress(String address) {
+		public ItemBuilder setAddress(String address) {
 			this.address = address;
+			return this;
 		}
-		public void setCategories(Set<String> categories) {
+		public ItemBuilder setCategories(Set<String> categories) {
 			this.categories = categories;
+			return this;
 		}
-		public void setImageUrl(String imageUrl) {
+		public ItemBuilder setImageUrl(String imageUrl) {
 			this.imageUrl = imageUrl;
+			return this;
 		}
-		public void setUrl(String url) {
+		public ItemBuilder setUrl(String url) {
 			this.url = url;
+			return this;
 		}
-		public void setDistance(double distance) {
+		public ItemBuilder setDistance(double distance) {
 			this.distance = distance;
+			return this;
 		}
 		
 		public Item build() {
