@@ -50,22 +50,27 @@ public class SearchItem extends HttpServlet {
 		out.close();
 		*/
 		response.setContentType("application/json");
-		double lat = Double.parseDouble(request.getParameter("lat"));
-		double lon = Double.parseDouble(request.getParameter("lon"));
-		String keyword = request.getParameter("term");
-		
-		TicketMasterAPI tmAPI = new TicketMasterAPI(); 
-		List<Item> items = tmAPI.search(lat, lon, keyword);
-		
-		JSONArray array = new JSONArray();
-		
-		
-		for(Item item : items) {
-			JSONObject obj = item.toJSONObject();
-			array.put(obj);
+		try {
+			double lat = Double.parseDouble(request.getParameter("lat"));
+			double lon = Double.parseDouble(request.getParameter("lon"));
+			String keyword = request.getParameter("term");
+			
+			TicketMasterAPI tmAPI = new TicketMasterAPI(); 
+			List<Item> items = tmAPI.search(lat, lon, keyword);
+			
+			JSONArray array = new JSONArray();
+			
+			for(Item item : items) {
+				JSONObject obj = item.toJSONObject();
+				array.put(obj);
+			}
+			
+			RpcHelper.writeJsonArray(response, array);
+		}
+		catch(Exception e) {
+			e.printStackTrace();
 		}
 		
-		RpcHelper.writeJsonArray(response, array);
   
 	}
 
