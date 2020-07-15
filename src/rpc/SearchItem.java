@@ -14,6 +14,8 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import db.DBConnection;
+import db.DBConnectionFactory;
 import entity.Item;
 import external.TicketMasterAPI;
 
@@ -36,7 +38,6 @@ public class SearchItem extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		//response.getWriter().append("Served at: ").append(request.getContextPath());
 		/*
 		PrintWriter out = response.getWriter();
@@ -49,14 +50,18 @@ public class SearchItem extends HttpServlet {
 		}
 		out.close();
 		*/
-		response.setContentType("application/json");
+		//response.setContentType("application/json");
 		try {
 			double lat = Double.parseDouble(request.getParameter("lat"));
 			double lon = Double.parseDouble(request.getParameter("lon"));
 			String keyword = request.getParameter("term");
 			
-			TicketMasterAPI tmAPI = new TicketMasterAPI(); 
-			List<Item> items = tmAPI.search(lat, lon, keyword);
+//			TicketMasterAPI tmAPI = new TicketMasterAPI(); 
+//			List<Item> items = tmAPI.search(lat, lon, keyword);
+			
+			DBConnection conn = DBConnectionFactory.getConnection();
+			List<Item> items = conn.searchItems(lat, lon, keyword);
+			conn.close(); 
 			
 			JSONArray array = new JSONArray();
 			

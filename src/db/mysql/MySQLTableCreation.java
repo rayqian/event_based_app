@@ -53,7 +53,8 @@ public class MySQLTableCreation {
 					+ "distance FLOAT,"
 					+ "PRIMARY KEY (item_id))";
 			s1.executeUpdate(sql);
-			
+			//create categories table seperately, because one item may have different categories
+			//primary key : item_id and category
 			sql = "CREATE TABLE categories ("
 					+ "item_id VARCHAR(255) NOT NULL,"
 					+ "category VARCHAR(255) NOT NULL,"
@@ -80,7 +81,7 @@ public class MySQLTableCreation {
 			
 			// Step 4: insert sample data
 			sql = "INSERT INTO users VALUES ("
-					+ "'1111', '3229c1097c00d497a0fd282d586be050', 'John', 'Smith')";
+					+ "'1122', '3229c1097c00d497a0fd282d586be050', 'John', 'Smith')";
 			System.out.println("Executing query: " + sql);
 			s1.executeUpdate(sql); 
 
